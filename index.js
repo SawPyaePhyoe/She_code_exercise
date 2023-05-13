@@ -9,6 +9,8 @@ const curBtn = document.getElementById("current");
 const temp = document.getElementById("temp");
 let apiKey = "ce144f0cf51fa43f03431f0488a36728";
 let units = "metric";
+const fah = document.getElementById("fah");
+const cel = document.getElementById("cel");
 
 function displayWeather(response) {
   console.log(response);
@@ -16,6 +18,14 @@ function displayWeather(response) {
   const Temp = Math.round(response.data.main.temp);
   console.log(Temp);
   temp.innerHTML = `${Temp}`;
+  fah.onclick = () => {
+    const fah = (Temp * 9) / 5 + 32;
+    temp.innerText = `${Math.round(fah)}`;
+  };
+  cel.onclick = () => {
+    const cel = ((temp.innerText - 32) * 5) / 9;
+    temp.innerText = `${Math.round(cel)}`;
+  };
   city.innerText = `${response.data.name}`;
   weather_status.innerText = response.data.weather[0].description;
   humidity.innerText = `${response.data.main.humidity}`;
